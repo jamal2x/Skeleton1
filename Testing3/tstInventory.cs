@@ -17,9 +17,9 @@ namespace Testing3
         public clsInventory()
         {
         }
-    
 
-    [TestMethod]
+
+        [TestMethod]
         public void QuantityPropertyOK()
         {
             clsInventory AnInventory = new clsInventory();
@@ -27,4 +27,32 @@ namespace Testing3
             AnInventory.Quantity = TestData;
             Assert.AreEqual(AnInventory.Quantity, TestData);
         }
-    } }
+
+        [TestMethod]
+        public void PartNamePropertyOK()
+        {
+            clsInventory AnInventory = new clsInventory();
+            string TestData = "Brake Pad";
+            AnInventory.PartName = TestData;
+            Assert.AreEqual(AnInventory.PartName, TestData);
+        }
+
+        [TestMethod]
+        public void PartIDPropertyOK()
+        {
+            clsInventory AnInventory = new clsInventory();
+            int TestData = 1;
+            AnInventory.PartID = TestData;
+            Assert.AreEqual(AnInventory.PartID, TestData);
+        }
+
+        [TestMethod]
+        public void PricePropertyOK()
+        {
+            clsInventory AnInventory = new clsInventory();
+            decimal TestData = 25.99m;
+            AnInventory.Price = TestData;
+            Assert.AreEqual(AnInventory.Price, TestData);
+        }
+    }
+}
