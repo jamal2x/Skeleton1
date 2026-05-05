@@ -50,7 +50,7 @@ namespace Testing3
         public void PricePropertyOK()
         {
             clsInventory AnInventory = new clsInventory();
-            decimal TestData = 25.99m;
+            decimal TestData = 45.99m;
             AnInventory.Price = TestData;
             Assert.AreEqual(AnInventory.Price, TestData);
         }
