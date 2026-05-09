@@ -1,6 +1,19 @@
-﻿public class clsInventory
+﻿using System;
+
+namespace ClassLibrary
 {
-    public int ProductID { get; set; }
-    public string ProductName { get; set; }
-    public decimal Price { get; set; }
+    public class clsInventory
+    {
+        public int PartID { get; set; }
+
+        public string PartName { get; set; }
+
+        public int Quantity { get; set; }
+
+        public decimal Price { get; set; }
+
+        public bool InStock { get; set; }
+
+        public bool Paid { get; set; }
+    }
 }

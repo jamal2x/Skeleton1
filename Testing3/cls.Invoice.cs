@@ -1,27 +1,37 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
-namespace Testing3
+
+
+namespace ClassLibrary
+
 {
-    [TestMethod]
-    public void QuantityPropertyOK()
+
+    public class clsInventory
+
     {
-        clsInvoice AnInvoice = new clsInvoice();
-        AnInvoice.Quantity = 5;
-        Assert.AreEqual(5, AnInvoice.Quantity);
+
+        public int PartID { get; set; }
+
+
+
+        public string PartName { get; set; }
+
+
+
+        public int Quantity { get; set; }
+
+
+
+        public decimal Price { get; set; }
+
+
+
+        public bool InStock { get; set; }
+
+
+
+        public bool Paid { get; set; }
+
     }
 
-    class clsInvoice
-    {
-        internal int Quantity;
-
-        public clsInvoice()
-        {
-        }
-    }
 }
-

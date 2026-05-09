@@ -54,5 +54,30 @@ namespace Testing3
             AnInventory.Price = TestData;
             Assert.AreEqual(AnInventory.Price, TestData);
         }
+
+
+        [TestMethod]
+        public void PaidPropertyOK()
+        {
+            clsInventory AnInventory = new clsInventory();
+
+            Boolean TestData = true;
+
+            AnInventory.Paid = TestData;
+
+            Assert.AreEqual(AnInventory.Paid, TestData);
+        }
+
+        [TestMethod]
+        public void InStockPropertyOK()
+        {
+            clsInventory AnInventory = new clsInventory();
+
+            Boolean TestData = true;
+
+            AnInventory.InStock = TestData;
+
+            Assert.AreEqual(AnInventory.InStock, TestData);
+        }
     }
 }
