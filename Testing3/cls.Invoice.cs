@@ -6,7 +6,7 @@ namespace ClassLibrary
 
 {
 
-    public class clsInventory
+    public class clsInvoice
 
     {
 

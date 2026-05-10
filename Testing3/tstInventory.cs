@@ -6,15 +6,21 @@ namespace Testing3
     [TestMethod]
     public void InstanceOK()
     {
-        clsInventory AnInventory = new clsInventory();
+        tstInventory AnInventory = new tstInventory();
         Assert.IsNotNull(AnInventory);
     }
 
-    class clsInventory
+    class tstInventory
     {
         private int Quantity;
 
-        public clsInventory()
+        public string PartName { get; private set; }
+        public bool InStock { get; private set; }
+        public decimal Price { get; private set; }
+        public bool Paid { get; private set; }
+        public int PartID { get; private set; }
+
+        public tstInventory()
         {
         }
 
@@ -22,7 +28,7 @@ namespace Testing3
         [TestMethod]
         public void QuantityPropertyOK()
         {
-            clsInventory AnInventory = new clsInventory();
+            tstInventory AnInventory = new tstInventory();
             Int32 TestData = 10;
             AnInventory.Quantity = TestData;
             Assert.AreEqual(AnInventory.Quantity, TestData);
@@ -31,7 +37,7 @@ namespace Testing3
         [TestMethod]
         public void PartNamePropertyOK()
         {
-            clsInventory AnInventory = new clsInventory();
+            tstInventory AnInventory = new tstInventory();
             string TestData = "Brake Pad";
             AnInventory.PartName = TestData;
             Assert.AreEqual(AnInventory.PartName, TestData);
@@ -40,7 +46,7 @@ namespace Testing3
         [TestMethod]
         public void PartIDPropertyOK()
         {
-            clsInventory AnInventory = new clsInventory();
+            tstInventory AnInventory = new tstInventory();
             int TestData = 1;
             AnInventory.PartID = TestData;
             Assert.AreEqual(AnInventory.PartID, TestData);
@@ -49,7 +55,7 @@ namespace Testing3
         [TestMethod]
         public void PricePropertyOK()
         {
-            clsInventory AnInventory = new clsInventory();
+            tstInventory AnInventory = new tstInventory();
             decimal TestData = 45.99m;
             AnInventory.Price = TestData;
             Assert.AreEqual(AnInventory.Price, TestData);
@@ -59,7 +65,7 @@ namespace Testing3
         [TestMethod]
         public void PaidPropertyOK()
         {
-            clsInventory AnInventory = new clsInventory();
+            tstInventory AnInventory = new tstInventory();
 
             Boolean TestData = true;
 
@@ -71,7 +77,7 @@ namespace Testing3
         [TestMethod]
         public void InStockPropertyOK()
         {
-            clsInventory AnInventory = new clsInventory();
+            tstInventory AnInventory = new tstInventory();
 
             Boolean TestData = true;
 
