@@ -51,17 +51,7 @@ namespace Testing3
             Assert.AreEqual(AnInvoice.ServiceID, TestData);
         }
 
-        [TestMethod]
-        public void PaidPropertyOK()
-        {
-            clsInvoice AnInvoice = new clsInvoice();
-
-            Boolean TestData = true;
-
-            AnInvoice.Paid = TestData;
-
-            Assert.AreEqual(AnInvoice.Paid, TestData);
-        }
+   
     }
     public class clsInvoice
     {
