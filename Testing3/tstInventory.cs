@@ -32,13 +32,6 @@ namespace Testing3
 
 
 
-        //=================================================
-
-        // INSTANCE TEST
-
-        //=================================================
-
-
 
         [TestMethod]
 
@@ -51,14 +44,6 @@ namespace Testing3
             Assert.IsNotNull(AnInventory);
 
         }
-
-
-
-        //=================================================
-
-        // PROPERTY TESTS
-
-        //=================================================
 
 
 
@@ -490,14 +475,7 @@ namespace Testing3
         }
 
 
-
-        //=================================================
-
-        // VALID METHOD TEST
-
-        //=================================================
-
-
+ //VALID METHOD TEST
 
         [TestMethod]
 
@@ -539,6 +517,205 @@ public void PartNameMinLessOne()
 
     Assert.AreNotEqual(Error, "");
 }
-    }
+    
 
+    [TestMethod]
+        public void PartNameMin()
+        {
+            clsInventory AnInventory = new clsInventory();
+            string Error = "";
+            string PartName = "a";
+
+            Error = AnInventory.Valid(PartName, Category, Quantity, Price, InStock);
+
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void PartNameMid()
+        {
+            clsInventory AnInventory = new clsInventory();
+            string Error = "";
+            string PartName = "Brake";
+
+            Error = AnInventory.Valid(PartName, Category, Quantity, Price, InStock);
+
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void PartNameMax()
+        {
+            clsInventory AnInventory = new clsInventory();
+            string Error = "";
+            string PartName = "";
+            PartName = PartName.PadRight(50, 'a');
+
+            Error = AnInventory.Valid(PartName, Category, Quantity, Price, InStock);
+
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void PartNameMaxPlusOne()
+        {
+            clsInventory AnInventory = new clsInventory();
+            string Error = "";
+            string PartName = "";
+            PartName = PartName.PadRight(51, 'a');
+
+            Error = AnInventory.Valid(PartName, Category, Quantity, Price, InStock);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+        //========================
+        // CATEGORY TESTS
+        //========================
+
+        [TestMethod]
+        public void CategoryMinLessOne()
+        {
+            clsInventory AnInventory = new clsInventory();
+            string Error = "";
+            string Category = "";
+
+            Error = AnInventory.Valid(PartName, Category, Quantity, Price, InStock);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void CategoryMid()
+        {
+            clsInventory AnInventory = new clsInventory();
+            string Error = "";
+            string Category = "Engine";
+
+            Error = AnInventory.Valid(PartName, Category, Quantity, Price, InStock);
+
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void CategoryMaxPlusOne()
+        {
+            clsInventory AnInventory = new clsInventory();
+            string Error = "";
+            string Category = "";
+            Category = Category.PadRight(51, 'a');
+
+            Error = AnInventory.Valid(PartName, Category, Quantity, Price, InStock);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+        //========================
+        // QUANTITY TESTS
+        //========================
+
+        [TestMethod]
+        public void QuantityMinLessOne()
+        {
+            clsInventory AnInventory = new clsInventory();
+            string Error = "";
+            string Quantity = "";
+
+            Error = AnInventory.Valid(PartName, Category, Quantity, Price, InStock);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void QuantityMid()
+        {
+            clsInventory AnInventory = new clsInventory();
+            string Error = "";
+            string Quantity = "50";
+
+            Error = AnInventory.Valid(PartName, Category, Quantity, Price, InStock);
+
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void QuantityInvalid()
+        {
+            clsInventory AnInventory = new clsInventory();
+            string Error = "";
+            string Quantity = "abc";
+
+            Error = AnInventory.Valid(PartName, Category, Quantity, Price, InStock);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+        //========================
+        // PRICE TESTS
+        //========================
+
+        [TestMethod]
+        public void PriceMinLessOne()
+        {
+            clsInventory AnInventory = new clsInventory();
+            string Error = "";
+            string Price = "";
+
+            Error = AnInventory.Valid(PartName, Category, Quantity, Price, InStock);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void PriceMid()
+        {
+            clsInventory AnInventory = new clsInventory();
+            string Error = "";
+            string Price = "25.99";
+
+            Error = AnInventory.Valid(PartName, Category, Quantity, Price, InStock);
+
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void PriceInvalid()
+        {
+            clsInventory AnInventory = new clsInventory();
+            string Error = "";
+            string Price = "abc";
+
+            Error = AnInventory.Valid(PartName, Category, Quantity, Price, InStock);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+        //========================
+        // INSTOCK TESTS
+        //========================
+
+        [TestMethod]
+        public void InStockValid()
+        {
+            clsInventory AnInventory = new clsInventory();
+            string Error = "";
+            string InStock = "true";
+
+            Error = AnInventory.Valid(PartName, Category, Quantity, Price, InStock);
+
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void InStockInvalid()
+        {
+            clsInventory AnInventory = new clsInventory();
+            string Error = "";
+            string InStock = "maybe";
+
+            Error = AnInventory.Valid(PartName, Category, Quantity, Price, InStock);
+
+            Assert.AreNotEqual(Error, "");
+        }
+    }
 }

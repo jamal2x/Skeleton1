@@ -5,7 +5,36 @@ namespace Testing3
 {
     [TestClass]
     public class tstInvoice
-    {
+    { //good test data
+        string LabourCosts = "50";
+        string PartCosts = "100";
+        string ServiceID = "1";
+        string VehicleID = "2";
+        string TotalAmount = "150";
+        string InvoiceDate = DateTime.Now.Date.ToString();
+
+
+        [TestMethod]
+        public void ValidMethodOK()
+        {
+            clsInvoice AnInvoice = new clsInvoice();
+
+            string Error = "";
+
+            Error = AnInvoice.Valid
+            (
+                LabourCosts,
+                PartCosts,
+                ServiceID,
+                VehicleID,
+                TotalAmount,
+                InvoiceDate
+            );
+
+            Assert.AreEqual(Error, "");
+        }
+
+
         [TestMethod]
         public void InvoiceDatePropertyOK()
         {
@@ -51,15 +80,415 @@ namespace Testing3
             Assert.AreEqual(AnInvoice.ServiceID, TestData);
         }
 
-   
+
     }
     public class clsInvoice
     {
         public DateTime InvoiceDate { get; set; }
         public decimal TotalAmount { get; set; }
-        public decimal PartsCost { get; set; }
-        public decimal LabourCost { get; set; }
+ 
         public int VehicleID { get; set; }
         public int ServiceID { get; set; }
+        public object PartCost { get; private set; }
+       
+        public object Paid { get; private set; }
+        public decimal PartsCosts { get; internal set; }
+        public object LabourCost { get; set; }
+        public decimal PartsCost { get; internal set; }
+
+        [TestMethod]
+        public void ServiceIDMinLessOne()
+        {
+            clsInvoice AnInvoice = new clsInvoice();
+
+            String Error = "";
+
+            string ServiceID = "2";
+
+            Error = AnInvoice.Valid(ServiceID,
+                                    VehicleID,
+                                    LabourCost,
+                                    PartCost,
+                                    TotalAmount,
+                                    Paid,
+                                    InvoiceDate);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void ServiceIDMaxPlusOne()
+        {
+            clsInvoice AnInvoice = new clsInvoice();
+
+            String Error = "";
+
+            string ServiceID = "14565";
+
+            Error = AnInvoice.Valid(ServiceID,
+                                    VehicleID,
+                                    LabourCost,
+                                    PartCost,
+                                    TotalAmount,
+                                    Paid,
+                                    InvoiceDate);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void VehicleIDMaxPlusOne()
+        {
+            clsInvoice AnInvoice = new clsInvoice();
+
+            String Error = "";
+
+            string ServiceID = "14565";
+
+            Error = AnInvoice.Valid(ServiceID,
+                                    VehicleID,
+                                    LabourCost,
+                                    PartCost,
+                                    TotalAmount,
+                                    Paid,
+                                    InvoiceDate);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void VehicleIDMinLessOne()
+        {
+            clsInvoice AnInvoice = new clsInvoice();
+
+            String Error = "";
+
+            string ServiceID = "2";
+
+            Error = AnInvoice.Valid(ServiceID,
+                                    VehicleID,
+                                    LabourCost,
+                                    PartCost,
+                                    TotalAmount,
+                                    Paid,
+                                    InvoiceDate);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void PaidMin()
+        {
+            clsInvoice AnInvoice = new clsInvoice();
+
+            String Error = "";
+
+            string Paid = "false";
+
+            Error = AnInvoice.Valid(ServiceID,
+                                    VehicleID,
+                                    LabourCost,
+                                    PartCost,
+                                    TotalAmount,
+                                    Paid,
+                                    InvoiceDate);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void PaidMax()
+        {
+            clsInvoice AnInvoice = new clsInvoice();
+
+            String Error = "";
+
+            string Paid = "true";
+
+            Error = AnInvoice.Valid(ServiceID,
+                                    VehicleID,
+                                    LabourCost,
+                                    PartCost,
+                                    TotalAmount,
+                                    Paid,
+                                    InvoiceDate);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+
+        [TestMethod]
+        public void InvoiceDateMin()
+        {
+            clsInvoice AnInvoice = new clsInvoice();
+
+            String Error = "";
+
+            DateTime TestDate = DateTime.Now.Date.AddYears(-10);
+            string InvoiceDate = TestDate.ToString();
+
+            Error = AnInvoice.Valid(ServiceID,
+                                    VehicleID,
+                                    LabourCost,
+                                    PartCost,
+                                    TotalAmount,
+                                    Paid,
+                                    InvoiceDate);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void InvoiceDateMid()
+        {
+            clsInvoice AnInvoice = new clsInvoice();
+
+            String Error = "";
+            DateTime TestDate = DateTime.Now.Date;
+            string InvoiceDate = TestDate.ToString();
+
+            Error = AnInvoice.Valid(ServiceID,
+                                    VehicleID,
+                                    LabourCost,
+                                    PartCost,
+                                    TotalAmount,
+                                    Paid,
+                                    InvoiceDate);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+
+        [TestMethod]
+        public void InvoiceDateMax()
+        {
+            clsInvoice AnInvoice = new clsInvoice();
+
+            String Error = "";
+            DateTime TestDate = DateTime.Now.Date;
+            string InvoiceDate = TestDate.ToString();
+
+            Error = AnInvoice.Valid(ServiceID,
+                                    VehicleID,
+                                    LabourCost,
+                                    PartCost,
+                                    TotalAmount,
+                                    Paid,
+                                    InvoiceDate);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void TotalAmountMin()
+        {
+            clsInvoice AnInvoice = new clsInvoice();
+
+            String Error = "";
+
+            string TotalAmount = "0.01";
+
+            Error = AnInvoice.Valid(ServiceID,
+                                    VehicleID,
+                                    LabourCost,
+                                    PartCost,
+                                    TotalAmount,
+                                    Paid,
+                                    InvoiceDate);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void TotalAmountMid()
+        {
+            clsInvoice AnInvoice = new clsInvoice();
+
+            String Error = "";
+            string TotalAmount = "250.00";
+
+            Error = AnInvoice.Valid(ServiceID,
+                                    VehicleID,
+                                    LabourCost,
+                                    PartCost,
+                                    TotalAmount,
+                                    Paid,
+                                    InvoiceDate);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+
+        [TestMethod]
+        public void TotalAmountMax()
+        {
+            clsInvoice AnInvoice = new clsInvoice();
+
+            String Error = "";
+            string TotalAmount = "10000.00";
+
+            Error = AnInvoice.Valid(ServiceID,
+                                    VehicleID,
+                                    LabourCost,
+                                    PartCost,
+                                    TotalAmount,
+                                    Paid,
+                                    InvoiceDate);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void PartCostMin()
+        {
+            clsInvoice AnInvoice = new clsInvoice();
+
+            String Error = "";
+
+            string TotalAmount = "0.01";
+
+            Error = AnInvoice.Valid(ServiceID,
+                                    VehicleID,
+                                    LabourCost,
+                                    PartCost,
+                                    TotalAmount,
+                                    Paid,
+                                    InvoiceDate);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void PartCostMid()
+        {
+            clsInvoice AnInvoice = new clsInvoice();
+
+            String Error = "";
+            string PartCost = "250.00";
+
+            Error = AnInvoice.Valid(ServiceID,
+                                    VehicleID,
+                                    LabourCost,
+                                    PartCost,
+                                    TotalAmount,
+                                    Paid,
+                                    InvoiceDate);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+
+        [TestMethod]
+        public void PartCostMax()
+        {
+            clsInvoice AnInvoice = new clsInvoice();
+
+            String Error = "";
+            string PartCost = "4000.00";
+
+            Error = AnInvoice.Valid(ServiceID,
+                                    VehicleID,
+                                    LabourCost,
+                                    PartCost,
+                                    TotalAmount,
+                                    Paid,
+                                    InvoiceDate);
+
+            Assert.AreNotEqual(Error, "");
+        }
+        [TestMethod]
+        public void LabourCostMin()
+        {
+            clsInvoice AnInvoice = new clsInvoice();
+
+            String Error = "";
+            string LabourCost = "0.01";
+
+            Error = AnInvoice.Valid(ServiceID,
+                                    VehicleID,
+                                    LabourCost,
+                                    PartCost,
+                                    TotalAmount,
+                                    Paid,
+                                    InvoiceDate);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void LabourCostMid()
+        {
+            clsInvoice AnInvoice = new clsInvoice();
+
+            String Error = "";
+            string LabourCost = "200.00";
+
+            Error = AnInvoice.Valid(ServiceID,
+                                    VehicleID,
+                                    LabourCost,
+                                    PartCost,
+                                    TotalAmount,
+                                    Paid,
+                                    InvoiceDate);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+
+        [TestMethod]
+        public void LabourCostMax()
+        {
+            clsInvoice AnInvoice = new clsInvoice();
+
+            String Error = "";
+            string LabourCost = "5000.00";
+
+            Error = AnInvoice.Valid(ServiceID,
+                                    VehicleID,
+                                    LabourCost,
+                                    PartCost,
+                                    TotalAmount,
+                                    Paid,
+                                    InvoiceDate);
+
+            Assert.AreNotEqual(Error, "");
+        }
+
+
+
+        private string Valid(int serviceID, int vehicleID, string labourCost, object partCost, decimal totalAmount, object paid, DateTime invoiceDate)
+        {
+            throw new NotImplementedException();
+        }
+
+        private string Valid(int serviceID, int vehicleID, object labourCost, string partCost, decimal totalAmount, object paid, DateTime invoiceDate)
+        {
+            throw new NotImplementedException();
+        }
+
+        private string Valid(int serviceID, int vehicleID, object labourCost, object partCost, string totalAmount, object paid, DateTime invoiceDate)
+        {
+            throw new NotImplementedException();
+        }
+
+        private string Valid(int serviceID, int vehicleID, object labourCost, object partCost, decimal totalAmount, object paid, string invoiceDate)
+        {
+            throw new NotImplementedException();
+        }
+
+        private string Valid(int serviceID, int vehicleID, object labourCost, object partCost, decimal totalAmount, string paid, DateTime invoiceDate)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal string Valid(string labourCosts, string partCosts, string serviceID, string vehicleID, string totalAmount, string invoiceDate)
+        {
+            throw new NotImplementedException();
+        }
+
+        private string Valid(string serviceID, int vehicleID, object labourCosts, object partCosts, decimal totalAmount, object paid, DateTime invoiceDate)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

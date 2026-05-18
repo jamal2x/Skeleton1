@@ -10,50 +10,47 @@ namespace ClassLibrary
 
     {
 
-        // private data members
+        //private data member for the part id property
+
+        private Int32 mPartID;
+
+
+
+        //part name private member
 
         private string mPartName;
 
-        private int mPartID;
 
-        private int mQuantity;
 
-        private double mPrice;
-
-        private bool mInStock;
+        //category private member
 
         private string mCategory;
 
-        public double TotalCost { get; set; }
 
 
-        // PartName property
+        //quantity private member
 
-        public string PartName
-
-        {
-
-            get
-
-            {
-
-                return mPartName;
-
-            }
-
-            set
-
-            {
-
-                mPartName = value;
-
-            }
-
-        }
+        private Int32 mQuantity;
 
 
 
-        // PartID property
+        //price private member
+
+        private decimal mPrice;
+
+
+
+        //instock private member
+
+        private Boolean mInStock;
+
+
+
+        // PUBLIC PROPERTIES
+
+
+
+
 
         public int PartID
 
@@ -79,7 +76,53 @@ namespace ClassLibrary
 
 
 
-        // Quantity property
+        public string PartName
+
+        {
+
+            get
+
+            {
+
+                return mPartName;
+
+            }
+
+            set
+
+            {
+
+                mPartName = value;
+
+            }
+
+        }
+
+
+
+        public string Category
+
+        {
+
+            get
+
+            {
+
+                return mCategory;
+
+            }
+
+            set
+
+            {
+
+                mCategory = value;
+
+            }
+
+        }
+
+
 
         public int Quantity
 
@@ -101,16 +144,11 @@ namespace ClassLibrary
 
             }
 
-
         }
 
-        public double CalculateTotal()
-        {
-            return Quantity * Price;
-        }
-        // Price property
 
-        public double Price
+
+        public decimal Price
 
         {
 
@@ -134,9 +172,7 @@ namespace ClassLibrary
 
 
 
-        // InStock property
-
-        public bool InStock
+        public Boolean InStock
 
         {
 
@@ -158,117 +194,220 @@ namespace ClassLibrary
 
         }
 
-        public string Category
-        {
-            get
-            {
-                return mCategory;
-            }
-            set
-            {
-                mCategory = value;
-            }
-        }
 
 
-   
+
+        // FIND METHOD
+
+
 
 
         public bool Find(int PartID)
+
         {
-            clsDataConnection DB = new clsDataConnection();
 
-            DB.AddParameter("@PartID", PartID);
+            //temporary hard coded data
 
-            DB.Execute("sproc_tblInventory_FilterByPartID");
+            mPartID = 1;
 
-            if (DB.Count == 1)
-            {
-                mPartID = Convert.ToInt32(DB.DataTable.Rows[0]["PartID"]);
+            mPartName = "Brake Pad";
 
-                mPartName = Convert.ToString(DB.DataTable.Rows[0]["PartName"]);
+            mCategory = "Brakes";
 
-                mCategory = Convert.ToString(DB.DataTable.Rows[0]["Category"]);
+            mQuantity = 10;
 
-                mQuantity = Convert.ToInt32(DB.DataTable.Rows[0]["Quantity"]);
+            mPrice = 25.99m;
 
-                mPrice = Convert.ToDouble(DB.DataTable.Rows[0]["Price"]);
+            mInStock = true;
 
-                mInStock = Convert.ToBoolean(DB.DataTable.Rows[0]["InStock"]);
 
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+
+            return true;
+
         }
 
-        public string Valid(object partID, object partName, object category, object quantity, object price, object inStock)
-        {
-            string Error = "";
 
-            return Error;
-        }
 
-        public string Valid(string partName, string category, string quantity, string price, string inStock)
+
+        // VALID METHOD
+
+
+
+
+
+        public string Valid(string partName,
+
+                            string category,
+
+                            string quantity,
+
+                            string price,
+
+                            string inStock)
+
         {
-            string Error = "";
+
+            //string variable to store error messages
+
+            String Error = "";
+
+
+
+            //temporary variables
+
+            Int32 QuantityTemp;
+
+            Decimal PriceTemp;
+
+            Boolean InStockTemp;
+
+
+
+            // PART NAME VALIDATION
+
+
 
             if (partName.Length == 0)
+
             {
-                Error = Error + "The part name may not be blank : ";
+
+                Error = Error + "Part name may not be blank : ";
+
             }
+
+
 
             if (partName.Length > 50)
+
             {
-                Error = Error + "Part name too long : ";
+
+                Error = Error + "Part name must be less than 50 characters : ";
+
             }
 
-            //CATEGORY
+
+            // CATEGORY VALIDATION
+
+
+
             if (category.Length == 0)
+
             {
+
                 Error = Error + "Category may not be blank : ";
+
             }
 
-            if (category.Length > 30)
+
+
+            if (category.Length > 50)
+
             {
-                Error = Error + "Category too long : ";
+
+                Error = Error + "Category must be less than 50 characters : ";
+
             }
 
-            //QUANTITY
+
+
+            // QUANTITY VALIDATION
+
+
+
+
             try
+
             {
-                Convert.ToInt32(quantity);
-            }
-            catch
-            {
-                Error = Error + "Quantity invalid : ";
+
+                QuantityTemp = Convert.ToInt32(quantity);
+
+
+
+                if (QuantityTemp < 0)
+
+                {
+
+                    Error = Error + "Quantity cannot be negative : ";
+
+                }
+
             }
 
-            //PRICE
-            try
-            {
-                Convert.ToDouble(price);
-            }
             catch
+
             {
-                Error = Error + "Price invalid : ";
+
+                Error = Error + "Quantity must be a number : ";
+
             }
+
+
+
+
+            try
+
+            {
+
+                PriceTemp = Convert.ToDecimal(price);
+
+
+
+                if (PriceTemp < 0)
+
+                {
+
+                    Error = Error + "Price cannot be negative : ";
+
+                }
+
+            }
+
+            catch
+
+            {
+
+                Error = Error + "Price must be numeric : ";
+
+            }
+
+
+            // INSTOCK VALIDATION
+
+
+            try
+
+            {
+
+                InStockTemp = Convert.ToBoolean(inStock);
+
+            }
+
+            catch
+
+            {
+
+                Error = Error + "InStock must be true or false : ";
+
+            }
+
+
+            //return any error messages
 
             return Error;
+
         }
 
-           
     
 
 
+        public decimal CalculateTotal()
 
-        public string Valid(string partName, string category, string quantity, string price)
         {
-            throw new NotImplementedException();
-        }
-    }
-}
 
-    
+            return Quantity * Price;
+
+        }
+
+    }
+
+}

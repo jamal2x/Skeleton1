@@ -21,9 +21,9 @@ public partial class InvoiceViewer : System.Web.UI.Page
 
         Response.Write("Vehicle ID: " + AnInvoice.VehicleID + "<br>");
 
-        Response.Write("Labour Costs: " + AnInvoice.LabourCosts + "<br>");
+        Response.Write("Labour Costs: " + AnInvoice.LabourCost + "<br>");
 
-        Response.Write("Parts Cost: " + AnInvoice.PartsCost + "<br>");
+        Response.Write("Parts Cost: " + AnInvoice.PartCost + "<br>");
 
         Response.Write("Total Amount: " + AnInvoice.TotalAmount + "<br>");
 

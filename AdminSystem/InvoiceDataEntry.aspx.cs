@@ -43,13 +43,13 @@ protected void btnOK_Click(object sender, EventArgs e)
             Response.Write("Labour Costs must be a number");
             return;
         }
-        AnInvoice.LabourCosts = labourCosts;
+        AnInvoice.LabourCost = (double)labourCosts;
 
-        AnInvoice.PartsCost = Convert.ToDecimal(txtPartCosts.Text);
+        AnInvoice.PartCosts = (double)Convert.ToDecimal(txtPartCosts.Text);
 
    
 
-        AnInvoice.TotalAmount = AnInvoice.LabourCosts + AnInvoice.PartsCost;
+        AnInvoice.TotalAmount = AnInvoice.LabourCost + AnInvoice.PartCosts;
 
         txtTotalAmount.Text = AnInvoice.TotalAmount.ToString();
 
