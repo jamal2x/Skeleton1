@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.IO;
 
 
@@ -17,9 +19,9 @@ namespace ClassLibrary
 
         private Int32 mVehicleID;
 
-        private double mLabourCosts;
+        private double mLabourCost;
 
-        private double mPartCosts;
+        private double mPartCost;
 
         private double mTotalAmount;
 
@@ -81,7 +83,7 @@ namespace ClassLibrary
 
 
 
-        //LabourCosts property
+        //LabourCost property
 
         public double LabourCost
 
@@ -91,7 +93,7 @@ namespace ClassLibrary
 
             {
 
-                return mLabourCosts;
+                return mLabourCost;
 
             }
 
@@ -99,7 +101,7 @@ namespace ClassLibrary
 
             {
 
-                mLabourCosts = value;
+                mLabourCost = value;
 
             }
 
@@ -109,7 +111,7 @@ namespace ClassLibrary
 
         //PartCosts property
 
-        public double PartCosts
+        public double PartCost
 
         {
 
@@ -117,7 +119,7 @@ namespace ClassLibrary
 
             {
 
-                return mPartCosts;
+                return mPartCost;
 
             }
 
@@ -125,7 +127,7 @@ namespace ClassLibrary
 
             {
 
-                mPartCosts = value;
+                mPartCost = value;
 
             }
 
@@ -210,7 +212,19 @@ namespace ClassLibrary
         }
 
         public string Error { get; private set; }
-        public string PartCost { get; set; }
+        public int Count { get; set; }
+        public int InvoiceNo { get; set; }
+        public int InvoiceID { get; set; }
+
+        public void Add(clsInvoice testItem)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Find(int primaryKey)
+        {
+            throw new NotImplementedException();
+        }
 
         public string Valid(string serviceID,
                      string vehicleID,
@@ -283,21 +297,6 @@ namespace ClassLibrary
             }
 
 
-            decimal partCost;
-
-            if (!decimal.TryParse(partCost, out partCost))
-            {
-                Error += "Part costs must be numeric : ";
-            }
-            else
-            {
-                if (partCost < 0)
-                    Error += "Part costs cannot be negative : ";
-
-                if (partCost > 5000)
-                    Error += "Part costs too high : ";
-            }
-
             decimal labour;
 
             if (!decimal.TryParse(labourCost, out labour))
@@ -314,10 +313,31 @@ namespace ClassLibrary
             }
 
             return Error;
-        } 
+        }
 
-  
+        public static implicit operator List<object>(clsInvoice v)
+        {
+            throw new NotImplementedException();
+        }
+    
 
+    public DataTable StatisticsGroupedByPaid()
+        {
+            clsDataConnection DB = new clsDataConnection();
+
+            DB.Execute("sproc_tblInvoice_Count_GroupByPaid");
+
+            return DB.DataTable;
+        }
+
+        public DataTable StatisticsGroupedByServiceID()
+        {
+            clsDataConnection DB = new clsDataConnection();
+
+            DB.Execute("sproc_tblInvoice_Count_GroupByServiceID");
+
+            return DB.DataTable;
+        }
 
     }
-}
+    }

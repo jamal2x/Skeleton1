@@ -1,13 +1,16 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 
 namespace Testing3
+
+
 {
     [TestClass]
     public class tstInvoice
     { //good test data
-        string LabourCosts = "50";
-        string PartCosts = "100";
+        string LabourCost = "50";
+        string PartCost = "100";
         string ServiceID = "1";
         string VehicleID = "2";
         string TotalAmount = "150";
@@ -23,8 +26,8 @@ namespace Testing3
 
             Error = AnInvoice.Valid
             (
-                LabourCosts,
-                PartCosts,
+                LabourCost,
+                PartCost,
                 ServiceID,
                 VehicleID,
                 TotalAmount,
@@ -95,6 +98,7 @@ namespace Testing3
         public decimal PartsCosts { get; internal set; }
         public object LabourCost { get; set; }
         public decimal PartsCost { get; internal set; }
+        public int Count { get; internal set; }
 
         [TestMethod]
         public void ServiceIDMinLessOne()
@@ -456,6 +460,43 @@ namespace Testing3
 
 
 
+        [TestMethod]
+        public void  StatStatisticsGroupedByPaid()
+        {
+            clsInvoice AnInvoice = new clsInvoice();
+
+            DataTable dT = AnInvoice.StatisticsGroupedByPaid() ;
+
+
+            int noOfRecords = 1;
+
+            Assert.AreEqual(noOfRecords, dT.Rows.Count);
+        }
+
+        private DataTable StatisticsGroupedByPaid()
+        {
+            throw new NotImplementedException();
+        }
+
+        [TestMethod]
+        public void StatStatisticsGroupedByServiceID()
+        {
+            clsInvoice AnInvoice = new clsInvoice();
+
+            DataTable TestData;
+
+            TestData = AnInvoice.StatisticsGroupedByServiceID();
+
+            int noOfRecords = 3;
+
+            Assert.AreEqual(noOfRecords, dT.Rows.Count);
+        }
+
+        private DataTable StatisticsGroupedByServiceID()
+        {
+            throw new NotImplementedException();
+        }
+
         private string Valid(int serviceID, int vehicleID, string labourCost, object partCost, decimal totalAmount, object paid, DateTime invoiceDate)
         {
             throw new NotImplementedException();
@@ -490,5 +531,20 @@ namespace Testing3
         {
             throw new NotImplementedException();
         }
+
+        internal void Add(clsInvoice testItem)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static implicit operator List<object>(clsInvoice v)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    internal class DataTable
+    {
+        public object Rows { get; internal set; }
     }
 }

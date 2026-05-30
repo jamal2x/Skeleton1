@@ -130,7 +130,9 @@ Inherits="_1_DataEntry" %>
 
             <tr>
 
-                <td></td>
+                <td>
+                    <asp:Label ID="lblCheck" runat="server" style="z-index: 1; left: 10px; top: 258px; position: absolute"></asp:Label>
+                </td>
 
                 <td>
 
@@ -179,3 +181,4 @@ Inherits="_1_DataEntry" %>
 </body>
 
 </html>
+

@@ -30,8 +30,7 @@ namespace Testing3
 
         string InStock = "true";
 
-
-
+        public decimal Testdata { get; private set; }
 
         [TestMethod]
 
@@ -147,8 +146,7 @@ namespace Testing3
 
             decimal TestData = 25.99m;
 
-            AnInventory.Price = (double)TestData;
-
+            AnInventory.Price = (decimal)Testdata;
 
 
             Assert.AreEqual(AnInventory.Price, TestData);
@@ -184,7 +182,7 @@ namespace Testing3
             clsInventory AnInventory = new clsInventory();
 
             AnInventory.Quantity = 2;
-            AnInventory.Price = 25.99;
+            AnInventory.Price = 25.99m;
 
             AnInventory.CalculateTotal();
 
@@ -420,7 +418,7 @@ namespace Testing3
 
 
 
-            if (AnInventory.Price != 25.99)
+            if (AnInventory.Price != 25.99m)
 
             {
 

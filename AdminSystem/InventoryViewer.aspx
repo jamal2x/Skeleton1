@@ -7,7 +7,7 @@
     <title></title>
 </head>
 <body>
-    This is the Inventory Viewer page
+
     <form id="form1" runat="server">
         <div>
         </div>

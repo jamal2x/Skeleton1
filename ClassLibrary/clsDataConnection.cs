@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.OleDb;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
-using System.Data.SqlClient;
-using System.Data.OleDb;
-using System.Data;
 //using ClassControlLib; -> class lib 
 
 ///This class uses the ado.net sql classes to provide a connection to an Azure sql server database.
@@ -33,9 +34,7 @@ public class clsDataConnection
 
     private string GetConnectionString()
     {
-        System.Net.WebClient client = new System.Net.WebClient();
-        string downloadString = client.DownloadString("http://localhost:5000/");
-        return downloadString;
+        return ConfigurationManager.ConnectionStrings["dbConnection"].ConnectionString;
     }
 
     public string GetDBName()
@@ -189,6 +188,10 @@ public class clsDataConnection
         return Convert.ToInt32(returnValue.Value);
     }
 
+  
+
+
+
     public Int32 Count
     //property that returns the count of records in the query results
     {
@@ -212,5 +215,19 @@ public class clsDataConnection
             //set the query results
             dataTable = value;
         }
+    }
+}
+
+namespace ClassLibrary
+{
+    public class clsAddressCollection
+    {
+    }
+}
+
+namespace System.Configuration
+{
+    class ConfigurationManager
+    {
     }
 }

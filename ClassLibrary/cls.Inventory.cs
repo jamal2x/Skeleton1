@@ -194,6 +194,8 @@ namespace ClassLibrary
 
         }
 
+        public double TotalCost { get; set; }
+
 
 
 
@@ -260,6 +262,7 @@ namespace ClassLibrary
             Decimal PriceTemp;
 
             Boolean InStockTemp;
+
 
 
 
@@ -408,6 +411,15 @@ namespace ClassLibrary
 
         }
 
+        public string Valid(string partName, string category, string quantity, string price)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string Valid(string partID, string partName, string category, string quantity, string inStock, string price)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }
